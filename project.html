@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <!--Set style of centered aligned to h1-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+        #bigben:hover {
+            border: 5px solid orange;
+        }
+
+        #northenlights:hover {
+            border: 5px solid gold;
+        }
+
+        #paris:hover {
+            border: 5px solid silver;
+        }
+
+        #waterslide:hover {
+            border: 5px solid #8C7853;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #gallery {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        #title {
+
+            font-family: 'Cinzel', serif;
+        }
+
+        button#next {
+            position: absolute;
+            top: 125%
+                /* 125% */
+            ;
+            right: 13%;
+        }
+
+        button#prev {
+            position: absolute;
+            top: 125%;
+            right: 83%;
+        }
+
+        button#pause {
+            position: absolute;
+            top: 125%;
+            right: 45%;
+        }
+    </style>
+    <!--Javascript for intializing variables-->
+    <script>
+        var timer;
+        var index = 0;
+        var gl = "s1";
+        var tour = new Array();
+        var playing = false;
+        var transition;
+        var title;
+    </script>
+</head>
+
+<body>
+    <h1>Project-Johnson QU2101B</h1>
+    <!--Table with 4 rows-->
+    <table width="100%" border="1">
+        <tbody>
+            <tr>
+                <td><img id="bigben" src="images/bigben1.png" onclick="preloadImages('s1');" alt="bigben1" width="250"
+                        height="150"></td>
+                <td><img id="northenlights" src="images/northernlights1.png" onclick="preloadImages('s2');"
+                        alt="northenlights1" width="250" height="150"></td>
+                <td><img id="paris" src="images/paris1.png" onclick="preloadImages('s3');" alt="paris1" width="250"
+                        height="150"></td>
+                <td><img id="waterslide" src="images/waterslide1.png" onclick="preloadImages('s4');" alt="waterslide1"
+                        width="250" height="150"></td>
+            </tr>
+            <tr style="background-color:antiquewhite">
+                <td colspan="4">
+                    <h1 id="title" style="color:olivedrab;  text-align:center">BigBen</h1>;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div id="gallery" style="vertical-align:middle; text-align:center;">
+                        <img src="images/bigben1.png" width="800" height="600" alt="bigben1">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="button" id="prev"><img src="images/backwards.png"></button></td>
+                <td colspan="2"><button type="button" id="pause"><img src="images/pause.png"></button></td>
+                <td><button type="button" id="next"><img src="images/forward.png"></button></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function preloadImages(gl) {
+            index = 0;
+            if (gl == "s1") {
+                tour[0] = "bigben1";
+                tour[1] = "bigben2";
+                tour[2] = "bigben3";
+                tour[3] = "bigben4";
+                document.getElementById("title").innerHTML = "Bigben";
+                document.body.style.backgroundColor = "orange";
+                document.getElementById("gallery").innerHTML = "<img src=images/" + tour[index] + ".png>";
+            }
+
+            else if (gl == "s2") {
+                tour[0] = "northernlights1";
+                tour[1] = "northernlights2";
+                tour[2] = "northernlights3";
+                tour[3] = "northernlights4";
+                document.getElementById("title").innerHTML = "Northernlights";
+                document.body.style.backgroundColor = "gold";
+                document.getElementById("gallery").innerHTML = "<img src=images/" + tour[index] + ".png>";
+            }
+
+
+            else if (gl == "s3") {
+                tour[0] = "paris1";
+                tour[1] = "paris2";
+                tour[2] = "paris3";
+                tour[3] = "paris4";
+                document.getElementById("title").innerHTML = "Paris";
+                document.body.style.backgroundColor = "silver";
+
+                document.getElementById("gallery").innerHTML = "<img src=images/" + tour[index] + ".png>";
+            }
+
+            else if (gl == "s4") {
+                tour[0] = "waterslide1";
+                tour[1] = "waterslide2";
+                tour[2] = "waterslide3";
+                tour[3] = "waterslide4";
+                document.getElementById("title").innerHTML = "Waterslide";
+                document.body.style.backgroundColor = "#8C7853";
+                document.getElementById("gallery").innerHTML = "<img src=images/" + tour[index] + ".png>";
+            }
+
+        }
+        window.onload = function () {
+            preloadImages("s1");
+            document.getElementById("pause").innerHTML = '<img src="images/pause.png" width="45px" height="45px">'
+            document.getElementById('gallery').innerHTML = "<img src=images/" + tour[index] + ".png>"
+            document.getElementById('gallery').style.opacity = 1;
+            transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 800);
+
+            transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 2800);
+
+            transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 4800);
+
+
+
+
+            function startSlideShow() {
+                timer = setInterval(function () {
+                    index++;
+                    if (index >= tour.length) {
+                        index = 0; //reset to index from start from 1st image
+                    }
+                    playing = true;
+                    document.getElementById('pause');
+                    document.getElementById('gallery').innerHTML = "<img src=images/" + tour[index] + ".png>";
+                    document.getElementById('gallery').style.opacity = 1;
+                    transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 700);
+                    transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 2800);
+                    transition = setTimeout("document.getElementById('gallery').style.opacity -= 0.3", 4800);
+                }, 3000);
+            }
+            startSlideShow();
+            next.onclick = function (evt) {
+                clearInterval(timer);
+                clearTimeout(transition);
+                index++;
+                if (index >= 4) {
+                    index = 0; //reset index to go to the first image
+                }
+                document.getElementById('gallery').innerHTML = "<img src='images/backwards" + tour[index] + ".png>";
+                document.getElementById('gallery').style.opacity = 1;
+                startSlideShow();
+            }
+            prev.onclick = function (evt) {
+                clearInterval(timer);
+                clearTimeout(transition);
+                index--;
+                if (index < 0) {
+                    index = 3; // reset index to go to last image
+                }
+                document.getElementById('gallery').innerHTML = "<img src=images/forward" + tour[index] + ".png>";
+                document.getElementById('gallery').style.opacity = 1;
+                startSlideShow();
+            }
+            pause.onclick = function (evt) {
+                if (playing) // check if slide show is playing
+                {
+                    playing = false;
+                    document.getElementById('pause').innerHTML = "<img src=images/pause.png>";
+                    clearInterval(timer);
+                    clearTimeout(transition);
+                }
+                else //check if slide show is not playing
+                {
+                    playing = true;
+                    document.getElementById('pause').innerHTML = "<img src=images/play.png>";
+                    startSlideShow();
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
